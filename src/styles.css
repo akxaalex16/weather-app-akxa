@@ -147,6 +147,20 @@ span {
 
 .github-link {
   position: relative;
-  top: -200px;
+  top: -2px;
   right: -420px;
+  display: inline;
+}
+
+.weather-app {
+  width: 890px;
+  height: 800px;
+}
+small span {
+  display: inline;
+  position: relative;
+  right: -420px;
+}
+span {
+  display: inline;
 }

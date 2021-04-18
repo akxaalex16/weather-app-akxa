@@ -39,7 +39,18 @@ function ampm() {
   }
 }
 
-let time = `${now.getHours()} : ${now.getMinutes()}`;
+let minutes = now.getMinutes();
+let hours = now.getHours();
+if (minutes < 10) {
+  minutes = `0${minutes}`;
+}
+if (hours < 10) {
+  hours = `0${hours}`;
+}
+if (hours === 0) {
+  hours = `12`;
+}
+let time = `${hours} : ${minutes}`;
 let currentTime = document.querySelector("#time");
 let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
@@ -60,8 +71,22 @@ function showCurrentTemp(response) {
   let tempCurrent = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
   tempNow.innerHTML = `${tempCurrent} °F`;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = response.data.main.humidity;
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  let rainElement = document.querySelector("#rain");
+  if (rainElement.innerHTML !== "NaN") {
+    return `${Math.round(response.data.rain)}`;
+  } else {
+    return 0;
+  }
 }
 
 function submitSearch(event) {

@@ -16,6 +16,7 @@
   <body>
     <body>
       <div class="container">
+      <div class="weather-app">
         <nav class="navbar navbar-dark bg-dark">
           <div class="container-fluid">
             <form id="search-form" class="d-flex">
@@ -50,11 +51,12 @@
       
   
         <div class="humidity-wind-rain">
-          Humidity: 76%
-          <br />
-          Wind: 2 mph SE
-          <br />
-          Chance of Rain: 3%
+          <ul>
+            <li>Humidity: <span id="humidity"> 76 </span> %
+              </li>
+          <li>Wind: <span id="wind"> 2 </span> mph</li>
+          <li>Chance of Rain: <span id="rain"> 3 </span> %</li>
+          </ul>
         </div>
   
         <div class="rise">Sunrise: 6:08 AM</div>
@@ -64,7 +66,7 @@
           <p id="temp-today" class="live-temp">
             52 °F
             <br />
-            <i class="fas fa-cloud-moon"></i>
+            <i  aria-hidden="true" id="icon" class="fas fa-cloud-moon"></i>
             <br />
             <p id="description-today" class="live-temp">Cloudy</p>
           </p>
@@ -165,8 +167,12 @@
             </div>
           </div>
         </div>
-        <a class="github-link" href="https://github.com/akxaalex16/weather-app-akxa" target="_blank">GitHub</a>
-      </div>
+        </div>
+        </div>
+        <small>
+        <a class="github-link" href="https://github.com/akxaalex16/weather-app-akxa" target="_blank">Open-source code</a>
+        <span>by Akxa Alex</span>
+        </small>
     <script src="src/index.js"></script>
   </body>
 </html>
