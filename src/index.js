@@ -45,16 +45,14 @@ if (minutes < 10) {
   minutes = `0${minutes}`;
 }
 if (hours < 10) {
-  hours = `0${hours}`;
+  hours = ` ${hours}`;
 }
-if (hours === 0) {
+if (hours === 23) {
   hours = `12`;
 }
-let time = `${hours} : ${minutes}`;
-let currentTime = document.querySelector("#time");
+
 let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
-currentTime.innerHTML = `${time} `;
 
 function changeDegrees(event) {
   event.preventDefault();
@@ -71,22 +69,49 @@ function showCurrentTemp(response) {
   let tempCurrent = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
   tempNow.innerHTML = `${tempCurrent} °F`;
-  let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
+
+  //  let iconElement = document.querySelector("#icon");
+  //iconElement.setAttribute(
+  //  `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
+
+  let currentTime = document.querySelector("#time");
+  currentTime.innerHTML = formatTime(response.data.dt * 1000);
+  console.log(response.data);
+
+  let sunriseElement = document.querySelector("#sunrise");
+  sunriseElement.innerHTML = formatTime(response.data.sys.sunrise * 1000);
+
+  let sunsetElement = document.querySelector("#sunset");
+  sunsetElement.innerHTML = formatTime(response.data.sys.sunset * 1000);
+
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
+
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
+
   let rainElement = document.querySelector("#rain");
   if (rainElement.innerHTML !== "NaN") {
     return `${Math.round(response.data.rain)}`;
   } else {
     return 0;
   }
+}
+
+function formatTime(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (hours < 10) {
+    hours = ` ${hours}`;
+  }
+  return `${hours}:${minutes}`;
 }
 
 function submitSearch(event) {
@@ -111,6 +136,20 @@ function showCurrentTempGeo(response) {
   h1.innerHTML = `${response.data.name}`;
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
+  let currentTime = document.querySelector("#time");
+  currentTime.innerHTML = formatTime(response.data.dt * 1000);
+
+  let sunriseElement = document.querySelector("#sunrise");
+  sunriseElement.innerHTML = formatTime(response.data.sys.sunrise * 1000);
+
+  let sunsetElement = document.querySelector("#sunset");
+  sunsetElement.innerHTML = formatTime(response.data.sys.sunset * 1000);
+
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = response.data.main.humidity;
+
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = Math.round(response.data.wind.speed);
 }
 
 function showPosition(position) {
