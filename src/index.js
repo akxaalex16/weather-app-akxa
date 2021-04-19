@@ -56,14 +56,20 @@ changeAmPm.innerHTML = ampm();
 
 function changeDegrees(event) {
   event.preventDefault();
-  let celsiusTemperature = Math.round(fahrenheitTemperature - 32) * (5 / 9);
-  let fahrenheitToC = document.querySelector("#temp-today");
-  fahrenheitToC.innerHTML = `${celsiusTemperature}°C`;
-  let changeBack = document.querySelector("#change-degrees");
-  changeBack.innerHTML = `Change to °F`;
+  let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
+  let celsius = document.querySelector("#temp-today");
+  celsius.innerHTML = `${Math.round(celsiusTemperature)}°C`;
 }
-let clickChangeDegree = document.querySelector("#change-degrees");
+let clickChangeDegree = document.querySelector("#celsius-link");
 clickChangeDegree.addEventListener("click", changeDegrees);
+
+function changeDegreesToF(event) {
+  event.preventDefault();
+  let fahrenheit = document.querySelector("#temp-today");
+  fahrenheit.innerHTML = Math.round(fahrenheitTemperature);
+}
+let clickChangeDegreeF = document.querySelector("#fahrenheit-link");
+clickChangeDegreeF.addEventListener("click", changeDegreesToF);
 
 function showCurrentTemp(response) {
   let fahrenheitTemperature = Math.round(response.data.main.temp);

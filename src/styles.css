@@ -163,3 +163,7 @@ small span {
 span {
   display: inline;
 }
+
+p a {
+  font-size: 20px;
+}
