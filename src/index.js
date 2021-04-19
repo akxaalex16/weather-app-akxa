@@ -56,9 +56,9 @@ changeAmPm.innerHTML = ampm();
 
 function changeDegrees(event) {
   event.preventDefault();
+  let celsiusTemperature = Math.round(fahrenheitTemperature - 32) * (5 / 9);
   let fahrenheitToC = document.querySelector("#temp-today");
-  let tempToday = 52;
-  fahrenheitToC.innerHTML = `${Math.round((tempToday - 32) * (5 / 9))} °C`;
+  fahrenheitToC.innerHTML = `${celsiusTemperature}°C`;
   let changeBack = document.querySelector("#change-degrees");
   changeBack.innerHTML = `Change to °F`;
 }
@@ -66,40 +66,32 @@ let clickChangeDegree = document.querySelector("#change-degrees");
 clickChangeDegree.addEventListener("click", changeDegrees);
 
 function showCurrentTemp(response) {
-  let tempCurrent = Math.round(response.data.main.temp);
+  let fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
-  tempNow.innerHTML = `${tempCurrent} °F`;
-
-  //  let iconElement = document.querySelector("#icon");
-  //iconElement.setAttribute(
-  //  `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
-
+  tempNow.innerHTML = `${fahrenheitTemperature} °F`;
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
-
   let currentTime = document.querySelector("#time");
   currentTime.innerHTML = formatTime(response.data.dt * 1000);
   console.log(response.data);
-
   let sunriseElement = document.querySelector("#sunrise");
   sunriseElement.innerHTML = formatTime(response.data.sys.sunrise * 1000);
-
   let sunsetElement = document.querySelector("#sunset");
   sunsetElement.innerHTML = formatTime(response.data.sys.sunset * 1000);
-
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
-
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
-
-  let rainElement = document.querySelector("#rain");
-  if (rainElement.innerHTML !== "NaN") {
-    return `${Math.round(response.data.rain)}`;
-  } else {
-    return 0;
-  }
+  let pressureElement = document.querySelector("#pressure");
+  pressureElement.innerHTML = response.data.main.pressure;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
+
+let fahrenheitTemperature = null;
 
 function formatTime(timestamp) {
   let date = new Date(timestamp);
@@ -119,10 +111,8 @@ function submitSearch(event) {
   let clickSearch = document.querySelector("#search-input");
   let city = document.querySelector("#city-search");
   city.innerHTML = `${clickSearch.value}`;
-
   let apiKey = "be198470a78f0753a3ca8949b9b72e9e";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${clickSearch.value}&appid=${apiKey}&units=imperial`;
-
   axios.get(apiUrl).then(showCurrentTemp, submitSearch);
 }
 let form = document.querySelector("#search-form");
@@ -138,18 +128,16 @@ function showCurrentTempGeo(response) {
   description.innerHTML = response.data.weather[0].description;
   let currentTime = document.querySelector("#time");
   currentTime.innerHTML = formatTime(response.data.dt * 1000);
-
   let sunriseElement = document.querySelector("#sunrise");
   sunriseElement.innerHTML = formatTime(response.data.sys.sunrise * 1000);
-
   let sunsetElement = document.querySelector("#sunset");
   sunsetElement.innerHTML = formatTime(response.data.sys.sunset * 1000);
-
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.main.humidity;
-
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
+  let pressureElement = document.querySelector("#pressure");
+  pressureElement.innerHTML = response.data.main.pressure;
 }
 
 function showPosition(position) {

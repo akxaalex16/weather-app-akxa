@@ -19,6 +19,9 @@ h3 {
   top: -50px;
   color: white;
 }
+img {
+  width: 50px;
+}
 
 span {
   display: block;
@@ -91,10 +94,6 @@ span {
   text-align: center;
   margin-bottom: 20px;
   color: navy;
-  font-size: 50px;
-}
-
-.fa-cloud-moon {
   font-size: 50px;
 }
 
