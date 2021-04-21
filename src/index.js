@@ -42,32 +42,37 @@ function ampm() {
 let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
 
-function changeDegrees(event) {
+function celsiusTemp(event) {
   event.preventDefault();
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  let celsius = document.querySelector("#temp-today");
-  celsius.innerHTML = `${Math.round(celsiusTemperature)}°C`;
-}
-let clickChangeDegree = document.querySelector("#celsius-link");
-clickChangeDegree.addEventListener("click", changeDegrees);
+  let tempElement = document.querySelector("#temp-today");
+  fahrenheitLink.classList.add("active");
+  tempElement.innerHTML = Math.round(celsiusTemperature);
 
-function changeDegreesToF(event) {
+let celsius = document.querySelector("#celsius-link");
+celsius.addEventListener("click", celsiusTemp);
+
+function fahrenheitTemp(event) {
   event.preventDefault();
-  let fahrenheit = document.querySelector("#temp-today");
-  fahrenheit.innerHTML = Math.round(fahrenheitTemperature);
+  let tempElement = document.querySelector("#temp-today");
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  tempElement.innerHTML = Math.round(fahrenheitTemperature);
+
 }
-let clickChangeDegreeF = document.querySelector("#fahrenheit-link");
-clickChangeDegreeF.addEventListener("click", changeDegreesToF);
+let fahrenheit = document.querySelector("#fahrenheit-link");
+fahrenheit.addEventListener("click", fahrenheitTemp);
+
+let fahrenheitTemperature = null;
 
 function showCurrentTemp(response) {
   let fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
-  tempNow.innerHTML = `${fahrenheitTemperature} °F`;
+  tempNow.innerHTML = `${fahrenheitTemperature}`;
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
   let currentTime = document.querySelector("#time");
   currentTime.innerHTML = formatTime(response.data.dt * 1000);
-  console.log(response.data);
   let sunriseElement = document.querySelector("#sunrise");
   sunriseElement.innerHTML = formatTime(response.data.sys.sunrise * 1000);
   let sunsetElement = document.querySelector("#sunset");
@@ -84,8 +89,6 @@ function showCurrentTemp(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 }
-
-let fahrenheitTemperature = null;
 
 function formatTime(timestamp) {
   let date = new Date(timestamp);

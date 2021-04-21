@@ -165,3 +165,16 @@ span {
 p a {
   font-size: 20px;
 }
+
+.min-max {
+  list-style: none;
+  padding: 0;
+}
+.active {
+  color: #fff;
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
+}
