@@ -73,6 +73,9 @@ span {
   top: -270px;
 }
 
+.card-body {
+  padding-bottom: 0;
+}
 .low-high {
   text-align: center;
 }
@@ -173,8 +176,18 @@ p a {
 .active {
   color: #fff;
   cursor: default;
+  text-decoration: none;
 }
 
 .active:hover {
   text-decoration: none;
+}
+
+#celsius-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.units {
+  font-size: large;
 }

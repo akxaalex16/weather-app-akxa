@@ -47,7 +47,9 @@ function celsiusTemp(event) {
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
   let tempElement = document.querySelector("#temp-today");
   fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
   tempElement.innerHTML = Math.round(celsiusTemperature);
+}
 
 let celsius = document.querySelector("#celsius-link");
 celsius.addEventListener("click", celsiusTemp);
@@ -58,7 +60,6 @@ function fahrenheitTemp(event) {
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   tempElement.innerHTML = Math.round(fahrenheitTemperature);
-
 }
 let fahrenheit = document.querySelector("#fahrenheit-link");
 fahrenheit.addEventListener("click", fahrenheitTemp);
@@ -137,7 +138,9 @@ function submitSearch(event) {
   city.innerHTML = `${clickSearch.value}`;
   let apiKey = "be198470a78f0753a3ca8949b9b72e9e";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${clickSearch.value}&appid=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(showCurrentTemp, submitSearch);
+  axios
+    .get(apiUrl)
+    .then(showCurrentTemp, submitSearch, celsiusTemp, fahrenheitTemp);
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitSearch);
