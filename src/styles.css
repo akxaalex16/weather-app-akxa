@@ -20,7 +20,7 @@ h3 {
   color: white;
 }
 img {
-  width: 50px;
+  width: 90px;
 }
 
 span {
@@ -52,16 +52,13 @@ span {
   position: relative;
   top: -280px;
   left: 500px;
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
 }
 
 .live-temp {
   text-align: center;
   color: white;
-  position: relative;
-  top: 20px;
-  right: -2px;
   font-weight: 650;
   font-size: 30px;
 }
@@ -99,6 +96,7 @@ span {
 
 .current p {
   font-size: 30px;
+  margin: 0;
 }
 
 #current-button {
@@ -126,7 +124,7 @@ span {
 
 .set {
   position: relative;
-  left: 715px;
+  left: 725px;
   top: -153px;
   color: #fff;
   background: rgba(228, 228, 235, 0.5);

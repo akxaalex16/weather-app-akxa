@@ -39,18 +39,6 @@ function ampm() {
   }
 }
 
-let minutes = now.getMinutes();
-let hours = now.getHours();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
-if (hours < 10) {
-  hours = ` ${hours}`;
-}
-if (hours === 23) {
-  hours = `12`;
-}
-
 let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
 
@@ -101,7 +89,34 @@ let fahrenheitTemperature = null;
 
 function formatTime(timestamp) {
   let date = new Date(timestamp);
-  let hours = date.getHours();
+  let hour = [
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+  ];
+
+  let hours = hour[date.getHours()];
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
