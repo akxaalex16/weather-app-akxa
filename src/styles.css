@@ -20,7 +20,7 @@ h3 {
   color: white;
 }
 img {
-  width: 90px;
+  width: 80px;
 }
 
 span {
@@ -31,7 +31,7 @@ span {
 
 .weekly {
   position: relative;
-  top: -265px;
+  top: -355px;
   font-size: 30px;
   color: #fff;
   font-weight: 650;
@@ -61,6 +61,8 @@ span {
   color: white;
   font-weight: 650;
   font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .card-title {
@@ -70,7 +72,7 @@ span {
 
 .card {
   position: relative;
-  top: -270px;
+  top: -360px;
 }
 
 .card-body {
@@ -183,11 +185,10 @@ p a {
   text-decoration: none;
 }
 
-#celsius-link {
-  text-decoration: none;
-  color: #fff;
-}
-
 .units {
   font-size: large;
+}
+
+footer {
+  font-size: 25px;
 }

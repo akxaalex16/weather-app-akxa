@@ -42,30 +42,6 @@ function ampm() {
 let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
 
-function celsiusTemp(event) {
-  event.preventDefault();
-  let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  let tempElement = document.querySelector("#temp-today");
-  fahrenheitLink.classList.add("active");
-  celsiusLink.classList.remove("active");
-  tempElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-let celsius = document.querySelector("#celsius-link");
-celsius.addEventListener("click", celsiusTemp);
-
-function fahrenheitTemp(event) {
-  event.preventDefault();
-  let tempElement = document.querySelector("#temp-today");
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  tempElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-let fahrenheit = document.querySelector("#fahrenheit-link");
-fahrenheit.addEventListener("click", fahrenheitTemp);
-
-let fahrenheitTemperature = null;
-
 function showCurrentTemp(response) {
   let fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
@@ -138,17 +114,15 @@ function submitSearch(event) {
   city.innerHTML = `${clickSearch.value}`;
   let apiKey = "be198470a78f0753a3ca8949b9b72e9e";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${clickSearch.value}&appid=${apiKey}&units=imperial`;
-  axios
-    .get(apiUrl)
-    .then(showCurrentTemp, submitSearch, celsiusTemp, fahrenheitTemp);
+  axios.get(apiUrl).then(showCurrentTemp, submitSearch);
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitSearch);
 
 function showCurrentTempGeo(response) {
-  let tempGeo = Math.round(response.data.main.temp);
+  let fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNowGeo = document.querySelector("#temp-today");
-  tempNowGeo.innerHTML = `${tempGeo} °F`;
+  tempNowGeo.innerHTML = `${fahrenheitTemperature}`;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${response.data.name}`;
   let description = document.querySelector("#description-today");
@@ -182,3 +156,27 @@ function clickCurrentButton(event) {
 
 let clickCurrent = document.querySelector("#current-button");
 clickCurrent.addEventListener("click", clickCurrentButton);
+
+function celsiusTemp(event) {
+  event.preventDefault();
+  let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
+  let tempElement = document.querySelector("#temp-today");
+  tempElement.innerHTML = Math.round(celsiusTemperature);
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+}
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", celsiusTemp);
+
+function fahrenheitTemp(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#temp-today");
+  tempElement.innerHTML = Math.round(fahrenheitTemperature);
+  fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+}
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", fahrenheitTemp);
+
+let fahrenheitTemperature = null;
