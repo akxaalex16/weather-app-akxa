@@ -43,9 +43,9 @@ let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
 
 function showCurrentTemp(response) {
-  let fahrenheitTemperature = Math.round(response.data.main.temp);
+  fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
-  tempNow.innerHTML = `${fahrenheitTemperature}`;
+  tempNow.innerHTML = fahrenheitTemperature;
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
   let currentTime = document.querySelector("#time");
@@ -120,9 +120,9 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitSearch);
 
 function showCurrentTempGeo(response) {
-  let fahrenheitTemperature = Math.round(response.data.main.temp);
+  fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNowGeo = document.querySelector("#temp-today");
-  tempNowGeo.innerHTML = `${fahrenheitTemperature}`;
+  tempNowGeo.innerHTML = fahrenheitTemperature;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${response.data.name}`;
   let description = document.querySelector("#description-today");
@@ -176,6 +176,7 @@ function fahrenheitTemp(event) {
   fahrenheitLink.classList.add("active");
   celsiusLink.classList.remove("active");
 }
+
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", fahrenheitTemp);
 
