@@ -35,7 +35,7 @@ span {
 
 .weekly {
   position: relative;
-  top: -355px;
+  top: -270px;
   font-size: 30px;
   color: #fff;
   font-weight: 650;
@@ -69,23 +69,6 @@ span {
   margin-bottom: 0;
 }
 
-.card-title {
-  text-align: center;
-  margin-bottom: 0;
-}
-
-.card {
-  position: relative;
-  top: -360px;
-}
-
-.card-body {
-  padding-bottom: 0;
-}
-.low-high {
-  text-align: center;
-}
-
 .form-control {
   width: 500px;
 }
@@ -111,11 +94,6 @@ span {
 #current-button {
   display: inline;
   margin-left: 10px;
-}
-
-.degree-c {
-  display: inline;
-  margin-left: 120px;
 }
 
 .rise {
@@ -157,11 +135,11 @@ span {
   right: -420px;
   display: inline;
 }
-
 .weather-app {
-  width: 890px;
-  height: 800px;
+  width: 915px;
+  height: 765px;
 }
+
 small span {
   display: inline;
   position: relative;
@@ -170,15 +148,10 @@ small span {
 span {
   display: inline;
 }
-
 p a {
   font-size: 20px;
 }
 
-.min-max {
-  list-style: none;
-  padding: 0;
-}
 .active {
   color: #fff;
   cursor: default;
