@@ -43,6 +43,7 @@ let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
 
 function showCurrentTemp(response) {
+  getForecast(response.data.coord);
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
   tempNow.innerHTML = fahrenheitTemperature;
@@ -182,34 +183,51 @@ fahrenheitLink.addEventListener("click", fahrenheitTemp);
 
 let fahrenheitTemperature = null;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function displayForecast(response) {
-  let forecast = response.data.daily;
+  console.log(response);
+  let forecast = response;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
-  forecast.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-                <div class="forecast-date">${forecastDay.dt}</div>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+                <div class="forecast-date">${formatDay(forecastDay.dt)}</div>
                 <img
-                  src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+                  src="https://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }@2x.png"
                   alt=""
                 />
                 <div class="forecast-temperature">
-                  <span class="forecast-temp-max">${forecastDay.temp.max}°</span>
-                  <span class="forecast-temp-min">${forecastDay.temp.min}°</span>
+                  <span class="forecast-temp-max">${Math.round(
+                    forecastDay.temp.max
+                  )}°</span>
+                  <span class="forecast-temp-min">${Math.round(
+                    forecastDay.temp.min
+                  )}°</span>
                 </div>
               </div>`;
+    }
     forecastHTML = forecastHTML + `</div>`;
   });
 
   forecastElement.innerHTML = forecastHTML;
 }
-displayForecast();
 
-function getForecast() {
-  let apiKey = "24d9a33aebe5b34c9d080e57021b03e3";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?let={}&lon={}&appid=${apiKey}&units=imperial`;
+function getForecast(coordinates) {
+  let apiKey = "62f239283b5ea0d92725df7914ca7b78";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
+displayForecast();
