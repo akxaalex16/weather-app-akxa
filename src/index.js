@@ -181,3 +181,35 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", fahrenheitTemp);
 
 let fahrenheitTemperature = null;
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                <div class="forecast-date">${forecastDay.dt}</div>
+                <img
+                  src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+                  alt=""
+                />
+                <div class="forecast-temperature">
+                  <span class="forecast-temp-max">${forecastDay.temp.max}°</span>
+                  <span class="forecast-temp-min">${forecastDay.temp.min}°</span>
+                </div>
+              </div>`;
+    forecastHTML = forecastHTML + `</div>`;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+displayForecast();
+
+function getForecast() {
+  let apiKey = "24d9a33aebe5b34c9d080e57021b03e3";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?let={}&lon={}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(displayForecast);
+}
