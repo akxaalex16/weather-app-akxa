@@ -43,7 +43,6 @@ let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
 
 function showCurrentTemp(response) {
-  getForecast(response.data.coord);
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let tempNow = document.querySelector("#temp-today");
   tempNow.innerHTML = fahrenheitTemperature;
@@ -66,6 +65,7 @@ function showCurrentTemp(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  getForecast(response.data.coord);
 }
 
 function formatTime(timestamp) {
@@ -191,8 +191,8 @@ function formatDay(timestamp) {
 }
 
 function displayForecast(response) {
-  console.log(response);
-  let forecast = response;
+  let forecast = response.data.daily;
+  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
@@ -215,19 +215,21 @@ function displayForecast(response) {
                   <span class="forecast-temp-min">${Math.round(
                     forecastDay.temp.min
                   )}°</span>
-                </div>
-              </div>`;
+                </div>`;
     }
     forecastHTML = forecastHTML + `</div>`;
   });
 
   forecastElement.innerHTML = forecastHTML;
+
+  let sunriseElement = document.querySelector("#sunrise");
+  sunriseElement.innerHTML = formatTime(response.data.current.sunrise * 1000);
+  let sunsetElement = document.querySelector("#sunset");
+  sunsetElement.innerHTML = formatTime(response.data.current.sunset * 1000);
 }
 
 function getForecast(coordinates) {
   let apiKey = "62f239283b5ea0d92725df7914ca7b78";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
-displayForecast();

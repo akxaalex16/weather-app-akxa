@@ -2,6 +2,7 @@ h1 {
   font-weight: 700;
   color: white;
   margin-top: 8px;
+  text-transform: capitalize;
 }
 
 h2 {
@@ -57,6 +58,9 @@ span {
   border-radius: 5px;
   padding: 12px 0px 12px 0px;
   background: rgba(228, 228, 235, 0.7);
+  margin-right: 15px;
+  margin-left: 5px;
+  width: 130px;
 }
 
 .forecast-date {
@@ -195,4 +199,8 @@ p a {
 
 footer {
   font-size: 25px;
+  width: 180px;
+  position: relative;
+  top: -10px;
+  right: -18px;
 }
