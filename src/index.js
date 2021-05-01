@@ -44,6 +44,8 @@ changeAmPm.innerHTML = ampm();
 
 function showCurrentTemp(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
+  let city = document.querySelector("#city-search");
+  city.innerHTML = response.data.name;
   let tempNow = document.querySelector("#temp-today");
   tempNow.innerHTML = fahrenheitTemperature;
   let description = document.querySelector("#description-today");
@@ -65,6 +67,7 @@ function showCurrentTemp(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
   getForecast(response.data.coord);
 }
 
@@ -108,15 +111,18 @@ function formatTime(timestamp) {
   return `${hours}:${minutes}`;
 }
 
+function search(city) {
+  let apiKey = "be198470a78f0753a3ca8949b9b72e9e";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(showCurrentTemp);
+}
+
 function submitSearch(event) {
   event.preventDefault();
   let clickSearch = document.querySelector("#search-input");
-  let city = document.querySelector("#city-search");
-  city.innerHTML = `${clickSearch.value}`;
-  let apiKey = "be198470a78f0753a3ca8949b9b72e9e";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${clickSearch.value}&appid=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(showCurrentTemp, submitSearch);
+  search(clickSearch.value);
 }
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitSearch);
 
@@ -233,3 +239,5 @@ function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
 }
+
+search("Los Angeles");
