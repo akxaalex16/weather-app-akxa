@@ -128,6 +128,8 @@ form.addEventListener("submit", submitSearch);
 
 function showCurrentTempGeo(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
+  let city = document.querySelector("#city-search");
+  city.innerHTML = response.data.name;
   let tempNowGeo = document.querySelector("#temp-today");
   tempNowGeo.innerHTML = fahrenheitTemperature;
   let h1 = document.querySelector("h1");
@@ -146,6 +148,8 @@ function showCurrentTempGeo(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   let pressureElement = document.querySelector("#pressure");
   pressureElement.innerHTML = response.data.main.pressure;
+
+  getForecast(response.data.coord);
 }
 
 function showPosition(position) {
