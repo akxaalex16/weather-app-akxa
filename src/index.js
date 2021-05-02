@@ -175,6 +175,21 @@ function celsiusTemp(event) {
   tempElement.innerHTML = `${Math.round(celsiusTemperature)}°`;
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
+
+  let forecastMax = document.querySelectorAll(".forecast-temp-max");
+  forecastMax.forEach(function (item) {
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+  });
+
+  let forecastMin = document.querySelectorAll(".forecast-temp-min");
+  forecastMin.forEach(function (item) {
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+  });
+
+  celsiusLink.removeEventListener("click", celsiusTemp);
+  fahrenheitLink.addEventListener("click", fahrenheitTemp);
 }
 
 let celsiusLink = document.querySelector("#celsius-link");
@@ -186,6 +201,23 @@ function fahrenheitTemp(event) {
   tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}°`;
   fahrenheitLink.classList.add("active");
   celsiusLink.classList.remove("active");
+
+  let forecastMax = document.querySelectorAll(".forecast-temp-max");
+  forecastMax.forEach(function (item) {
+    console.log(item);
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+  });
+
+  let forecastMin = document.querySelectorAll(".forecast-temp-min");
+  forecastMin.forEach(function (item) {
+    console.log(item);
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+  });
+
+  celsiusLink.addEventListener("click", celsiusTemp);
+  fahrenheitLink.removeEventListener("click", fahrenheitTemp);
 }
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
@@ -216,15 +248,15 @@ function displayForecast(response) {
                   alt=""
                 />
                 <div class="forecast-temperature">
-                  <span class="forecast-temp-max temp-today">${Math.round(
+                  <span class="forecast-temp-max">${Math.round(
                     forecastDay.temp.max
                   )}°</span>
-                  <span class="forecast-temp-min temp-today">${Math.round(
+                  <span class="forecast-temp-min">${Math.round(
                     forecastDay.temp.min
                   )}°</span>
                 </div>`;
-      console.log(forecastDay);
     }
+
     forecastHTML = forecastHTML + `</div>`;
   });
 
