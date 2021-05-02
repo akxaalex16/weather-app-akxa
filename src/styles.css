@@ -3,6 +3,7 @@ h1 {
   color: white;
   margin-top: 8px;
   text-transform: capitalize;
+  text-shadow: 1px 1px 2px black;
 }
 
 h2 {
@@ -11,7 +12,8 @@ h2 {
   top: 40px;
   color: white;
   font-size: 30px;
-  font-weight: 650;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px black;
 }
 
 h3 {
@@ -19,19 +21,18 @@ h3 {
   position: relative;
   top: -50px;
   color: white;
+  font-family: "EB Garamond", serif;
 }
 img {
   width: 80px;
 }
 
-ul {
-  list-style-type: none;
+li {
+  font-family: "EB Garamond", serif;
 }
 
-span {
-  display: block;
-  text-align: center;
-  margin-bottom: 20px;
+ul {
+  list-style-type: none;
 }
 
 .weekly {
@@ -40,6 +41,7 @@ span {
   font-size: 30px;
   color: #fff;
   font-weight: 650;
+  text-shadow: 1px 1px 2px black;
 }
 
 .weekly-forecast {
@@ -65,10 +67,19 @@ span {
 
 .forecast-date {
   font-size: 20px;
+  font-family: "EB Garamond", serif;
+}
+
+.forecast-temp-max {
+  font-size: 20px;
+  font-family: "EB Garamond", serif;
+  font-weight: 500;
 }
 
 .forecast-temp-min {
   opacity: 0.6;
+  font-size: 20px;
+  font-family: "EB Garamond", serif;
 }
 
 .humidity-wind-rain {
@@ -95,8 +106,12 @@ span {
   color: white;
   font-weight: 650;
   font-size: 30px;
-  margin-top: 10px;
   margin-bottom: 0;
+}
+
+#temp-today {
+  font-size: 40px;
+  text-shadow: 1px 1px 2px black;
 }
 
 .form-control {
@@ -125,6 +140,7 @@ span {
   font-size: 20px;
   padding: 10px;
   width: max-content;
+  font-family: "EB Garamond", serif;
 }
 
 .set {
@@ -138,13 +154,14 @@ span {
   font-size: 20px;
   padding: 10px;
   width: max-content;
+  font-family: "EB Garamond", serif;
 }
 
 .container {
   border-radius: 8px;
   width: 940px;
   height: 765px;
-  background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
 }
 
 .github-link {
@@ -192,4 +209,6 @@ footer {
   position: relative;
   top: -10px;
   right: -18px;
+  text-transform: capitalize;
+  text-shadow: 1px 1px 2px black;
 }

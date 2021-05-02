@@ -46,7 +46,7 @@ function showCurrentTemp(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let city = document.querySelector("#city-search");
   city.innerHTML = response.data.name;
-  let tempNow = document.querySelectorAll(".temp-today");
+  let tempNow = document.querySelector("#temp-today");
   tempNow.innerHTML = `${fahrenheitTemperature}°`;
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
@@ -130,7 +130,7 @@ function showCurrentTempGeo(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let city = document.querySelector("#city-search");
   city.innerHTML = response.data.name;
-  let tempNowGeo = document.querySelectorAll(".temp-today");
+  let tempNowGeo = document.querySelector("#temp-today");
   tempNowGeo.innerHTML = `${fahrenheitTemperature}°`;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${response.data.name}`;
@@ -171,7 +171,7 @@ clickCurrent.addEventListener("click", clickCurrentButton);
 function celsiusTemp(event) {
   event.preventDefault();
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  let tempElement = document.querySelectorAll(".temp-today");
+  let tempElement = document.querySelector("#temp-today");
   tempElement.innerHTML = `${Math.round(celsiusTemperature)}°`;
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
@@ -182,7 +182,7 @@ celsiusLink.addEventListener("click", celsiusTemp);
 
 function fahrenheitTemp(event) {
   event.preventDefault();
-  let tempElement = document.querySelectorAll(".temp-today");
+  let tempElement = document.querySelector("#temp-today");
   tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}°`;
   fahrenheitLink.classList.add("active");
   celsiusLink.classList.remove("active");
@@ -191,18 +191,15 @@ function fahrenheitTemp(event) {
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", fahrenheitTemp);
 
-let fahrenheitTemperature = null;
-
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   return days[day];
 }
 
 function displayForecast(response) {
   let forecast = response.data.daily;
-  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
@@ -226,12 +223,15 @@ function displayForecast(response) {
                     forecastDay.temp.min
                   )}°</span>
                 </div>`;
+      console.log(forecastDay);
     }
     forecastHTML = forecastHTML + `</div>`;
   });
 
   forecastElement.innerHTML = forecastHTML;
 }
+
+let fahrenheitTemperature = null;
 
 function getForecast(coordinates) {
   let apiKey = "62f239283b5ea0d92725df7914ca7b78";
