@@ -46,8 +46,8 @@ function showCurrentTemp(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let city = document.querySelector("#city-search");
   city.innerHTML = response.data.name;
-  let tempNow = document.querySelector("#temp-today");
-  tempNow.innerHTML = fahrenheitTemperature;
+  let tempNow = document.querySelectorAll(".temp-today");
+  tempNow.innerHTML = `${fahrenheitTemperature}°`;
   let description = document.querySelector("#description-today");
   description.innerHTML = response.data.weather[0].description;
   let currentTime = document.querySelector("#time");
@@ -130,8 +130,8 @@ function showCurrentTempGeo(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let city = document.querySelector("#city-search");
   city.innerHTML = response.data.name;
-  let tempNowGeo = document.querySelector("#temp-today");
-  tempNowGeo.innerHTML = fahrenheitTemperature;
+  let tempNowGeo = document.querySelectorAll(".temp-today");
+  tempNowGeo.innerHTML = `${fahrenheitTemperature}°`;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `${response.data.name}`;
   let description = document.querySelector("#description-today");
@@ -171,8 +171,8 @@ clickCurrent.addEventListener("click", clickCurrentButton);
 function celsiusTemp(event) {
   event.preventDefault();
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  let tempElement = document.querySelector("#temp-today");
-  tempElement.innerHTML = Math.round(celsiusTemperature);
+  let tempElement = document.querySelectorAll(".temp-today");
+  tempElement.innerHTML = `${Math.round(celsiusTemperature)}°`;
   fahrenheitLink.classList.remove("active");
   celsiusLink.classList.add("active");
 }
@@ -182,8 +182,8 @@ celsiusLink.addEventListener("click", celsiusTemp);
 
 function fahrenheitTemp(event) {
   event.preventDefault();
-  let tempElement = document.querySelector("#temp-today");
-  tempElement.innerHTML = Math.round(fahrenheitTemperature);
+  let tempElement = document.querySelectorAll(".temp-today");
+  tempElement.innerHTML = `${Math.round(fahrenheitTemperature)}°`;
   fahrenheitLink.classList.add("active");
   celsiusLink.classList.remove("active");
 }
@@ -219,10 +219,10 @@ function displayForecast(response) {
                   alt=""
                 />
                 <div class="forecast-temperature">
-                  <span class="forecast-temp-max">${Math.round(
+                  <span class="forecast-temp-max temp-today">${Math.round(
                     forecastDay.temp.max
                   )}°</span>
-                  <span class="forecast-temp-min">${Math.round(
+                  <span class="forecast-temp-min temp-today">${Math.round(
                     forecastDay.temp.min
                   )}°</span>
                 </div>`;
@@ -231,11 +231,6 @@ function displayForecast(response) {
   });
 
   forecastElement.innerHTML = forecastHTML;
-
-  let sunriseElement = document.querySelector("#sunrise");
-  sunriseElement.innerHTML = formatTime(response.data.current.sunrise * 1000);
-  let sunsetElement = document.querySelector("#sunset");
-  sunsetElement.innerHTML = formatTime(response.data.current.sunset * 1000);
 }
 
 function getForecast(coordinates) {

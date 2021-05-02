@@ -103,19 +103,6 @@ span {
   width: 500px;
 }
 
-.fa-wind,
-.fa-sun,
-.fa-cloud,
-.fa-cloud-sun-rain,
-.fa-cloud-showers-heavy,
-.fa-cloud-rain {
-  display: block;
-  text-align: center;
-  margin-bottom: 20px;
-  color: navy;
-  font-size: 50px;
-}
-
 .current p {
   font-size: 30px;
   margin: 0;
@@ -124,6 +111,7 @@ span {
 #current-button {
   display: inline;
   margin-left: 10px;
+  margin-right: 80px;
 }
 
 .rise {
@@ -184,13 +172,14 @@ p a {
 }
 
 .active {
-  color: #fff;
   cursor: default;
   text-decoration: none;
+  color: #fff;
 }
 
 .active:hover {
   text-decoration: none;
+  color: #fff;
 }
 
 .units {
