@@ -163,8 +163,8 @@ ul {
 
 .github-link {
   position: relative;
-  top: -160px;
-  right: -40px;
+  top: -200px;
+  right: -5px;
   display: inline;
 }
 .weather-app {
@@ -175,8 +175,8 @@ ul {
 small span {
   display: inline;
   position: relative;
-  top: -159px;
-  right: -40px;
+  top: -200px;
+  right: -8px;
 }
 span {
   display: inline;
@@ -188,12 +188,10 @@ p a {
 .active {
   cursor: default;
   text-decoration: none;
-  color: #fff;
 }
 
 .active:hover {
   text-decoration: none;
-  color: #000;
 }
 
 #celsius-link {

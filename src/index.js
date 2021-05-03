@@ -44,7 +44,6 @@ changeAmPm.innerHTML = ampm();
 
 function displayForecast(response) {
   let forecast = response.data.daily;
-  console.log(response.data);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
@@ -74,6 +73,9 @@ function displayForecast(response) {
   });
 
   forecastElement.innerHTML = forecastHTML;
+
+  let UVElement = document.querySelector("#uv");
+  UVElement.innerHTML = uvIndex(Math.round(response.data.current.uvi));
 }
 
 function getForecast(coordinates) {
@@ -100,8 +102,6 @@ function showCurrentTemp(response) {
   humidityElement.innerHTML = response.data.main.humidity;
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  let pressureElement = document.querySelector("#pressure");
-  pressureElement.innerHTML = response.data.main.pressure;
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
@@ -151,6 +151,15 @@ function formatTime(timestamp) {
   return `${hours}:${minutes}`;
 }
 
+function uvIndex(number) {
+  if (number <= 2) return "Low";
+  if (number >= 3 && number <= 5) return "Moderate";
+  if (number >= 6 && number <= 8) return "High";
+  else {
+    return "Extreme";
+  }
+}
+
 function search(city) {
   let apiKey = "be198470a78f0753a3ca8949b9b72e9e";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
@@ -186,8 +195,6 @@ function showCurrentTempGeo(response) {
   humidityElement.innerHTML = response.data.main.humidity;
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
-  let pressureElement = document.querySelector("#pressure");
-  pressureElement.innerHTML = response.data.main.pressure;
 
   getForecast(response.data.coord);
 }
@@ -244,14 +251,12 @@ function fahrenheitTemp(event) {
 
   let forecastMax = document.querySelectorAll(".forecast-temp-max");
   forecastMax.forEach(function (item) {
-    console.log(item);
     let currentTemp = item.innerHTML;
     item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
   });
 
   let forecastMin = document.querySelectorAll(".forecast-temp-min");
   forecastMin.forEach(function (item) {
-    console.log(item);
     let currentTemp = item.innerHTML;
     item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
   });
