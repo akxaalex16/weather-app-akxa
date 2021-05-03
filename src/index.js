@@ -42,6 +42,46 @@ function ampm() {
 let changeAmPm = document.querySelector("#ampm");
 changeAmPm.innerHTML = ampm();
 
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  console.log(response.data);
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+                <div class="forecast-date">${formatDay(forecastDay.dt)}</div>
+                <img
+                  src="https://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }@2x.png"
+                  alt=""
+                />
+                <div class="forecast-temperature">
+                  <span class="forecast-temp-max">${Math.round(
+                    forecastDay.temp.max
+                  )}</span>°
+                  <span class="forecast-temp-min">${Math.round(
+                    forecastDay.temp.min
+                  )}</span>°
+                </div>`;
+    }
+
+    forecastHTML = forecastHTML + `</div>`;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "62f239283b5ea0d92725df7914ca7b78";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function showCurrentTemp(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let city = document.querySelector("#city-search");
@@ -230,45 +270,6 @@ function formatDay(timestamp) {
   return days[day];
 }
 
-function displayForecast(response) {
-  let forecast = response.data.daily;
-  let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row">`;
-
-  forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
-      forecastHTML =
-        forecastHTML +
-        `<div class="col-2">
-                <div class="forecast-date">${formatDay(forecastDay.dt)}</div>
-                <img
-                  src="https://openweathermap.org/img/wn/${
-                    forecastDay.weather[0].icon
-                  }@2x.png"
-                  alt=""
-                />
-                <div class="forecast-temperature">
-                  <span class="forecast-temp-max">${Math.round(
-                    forecastDay.temp.max
-                  )}°</span>
-                  <span class="forecast-temp-min">${Math.round(
-                    forecastDay.temp.min
-                  )}°</span>
-                </div>`;
-    }
-
-    forecastHTML = forecastHTML + `</div>`;
-  });
-
-  forecastElement.innerHTML = forecastHTML;
-}
-
 let fahrenheitTemperature = null;
-
-function getForecast(coordinates) {
-  let apiKey = "62f239283b5ea0d92725df7914ca7b78";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(displayForecast);
-}
 
 search("Los Angeles");
